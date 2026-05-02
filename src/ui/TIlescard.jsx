@@ -41,7 +41,7 @@ const TIlescard = ({ tile }) => {
                     <button>
                         <Link
                             aria-label={`View ${tile.title} details`}
-                            href={`/tiles/${tile.id}`}
+                            href={`/alltiles/${tile.id}`}
                             className="bg-blue-600 text-white px-5 py-2 rounded-full text-xs font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
                         >
                             View Details
