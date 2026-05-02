@@ -1,7 +1,7 @@
 'use client'
 import Link from "next/link";
 import { Bars, Xmark } from "@gravity-ui/icons";
-import { Button } from "@heroui/react";
+import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import logo from '../../image/tiles_gallery_logo.png'
 import { signOut, useSession } from "@/lib/auth-client";
@@ -27,17 +27,25 @@ const Navbar = () => {
     </>
     const buttons = <>
         {
-            user ? <div>
-                    <h2>{user.name}</h2>
-                    <button onClick={() => signOut()}>Sign out</button>
-            </div> : <>
-                <Button> <Link href="/login" className="text-sm font-medium">
-                    Login
-                </Link></Button>
-                <Link href="/signup" className=" text-black px-4 py-2 rounded-md text-sm font-medium">
-                    Signup
-                </Link>
-            </>
+            user ?
+                <div className="flex items-center gap-3">
+                    <Avatar>
+                        <Avatar.Image alt="John Doe" src={user.image} referrerPolicy="no-referrer" />
+                        <Avatar.Fallback>{user.name[0]}</Avatar.Fallback>
+                    </Avatar>
+                    <div>
+                        <Button size="sm" onClick={() => signOut()}>Sign out</Button>
+                    </div>
+                </div>
+                :
+                <>
+                    <Button> <Link href="/login" className="text-sm font-medium">
+                        Login
+                    </Link></Button>
+                    <Link href="/signup" className=" text-black px-4 py-2 rounded-md text-sm font-medium">
+                        Signup
+                    </Link>
+                </>
         }
     </>
     return (

@@ -4,6 +4,8 @@ import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Fieldset, Form, Input, Label, TextField } from "@heroui/react";
 import { email } from "better-auth";
 import { useRouter } from "next/navigation";
+import { FaGoogle } from "react-icons/fa";
+import { handleGoggle } from "../login/page";
 const Signup = () => {
     const router = useRouter()
     const onSubmit = async (e) => {
@@ -103,6 +105,7 @@ const Signup = () => {
                     </Button>
                 </div>
             </Form>
+            <Button onClick={handleGoggle} className='w-full mt-5'><FaGoogle></FaGoogle> login with gogle</Button>
         </div>
     );
 };

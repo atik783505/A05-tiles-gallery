@@ -3,6 +3,16 @@ import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Fieldset, Form, Input, Label, TextField } from "@heroui/react";
 import { email } from "better-auth";
+import { FaGoogle } from "react-icons/fa";
+
+// for gogle login
+export const handleGoggle = async () => {
+    await authClient.signIn.social({
+        provider: "google",
+    });
+};
+
+
 const Login = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -19,14 +29,13 @@ const Login = () => {
         if (error) {
             console.error("Login Error:", error);
             alert(error.message || "Login failed! Please check your credentials.");
-            return; 
+            return;
         }
 
         if (data) {
             alert('Login successful!');
         }
     }
-
     return (
         <div className="w-5/12 mx-auto py-10">
             <Form onSubmit={onSubmit} className="flex w-96 flex-col gap-4">
@@ -78,6 +87,7 @@ const Login = () => {
                     </Button>
                 </div>
             </Form>
+            <Button onClick={handleGoggle} className='w-full mt-5'><FaGoogle></FaGoogle> login with gogle</Button>
         </div>
     );
 };
