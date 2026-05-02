@@ -2,7 +2,7 @@ import tilesData from '@/data';
 import TIlescard from '@/ui/TIlescard';
 import React from 'react';
 
-const page = async() => {
+const Alltiles = async() => {
     const data =await tilesData()
     return (
         <div className='grid grid-cols-4'>
@@ -14,4 +14,4 @@ const page = async() => {
     );
 };
 
-export default page;
+export default Alltiles;

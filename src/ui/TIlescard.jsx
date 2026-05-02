@@ -10,10 +10,10 @@ const TIlescard = ({ tile }) => {
                 <div className="relative h-60 w-full overflow-hidden rounded-lg">
                     <Image
                         src={tile.image}
-                        alt={tile.title || "Tile image"} // অর্থবহ alt টেক্সট দেওয়া ভালো
-                        fill // এটি ইমেজকে তার প্যারেন্ট div (h-60) অনুযায়ী জায়গা নিতে বাধ্য করবে
-                        className="object-cover transition-transform duration-500 group-hover:scale-105" // object-cover ই ইমেজকে সমানভাবে ফিট করে
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // পারফরম্যান্সের জন্য এটি দেওয়া ভালো
+                        alt={tile.title || "Tile image"}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                     />
                 </div>
 
