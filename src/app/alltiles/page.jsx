@@ -5,7 +5,7 @@ import React from 'react';
 const Alltiles = async() => {
     const data =await tilesData()
     return (
-        <div className='grid grid-cols-4'>
+        <div className='grid grid-cols-4 gap-3'>
             {
                 data.map(tile => <TIlescard key={tile.id} tile={tile}></TIlescard>)
             }

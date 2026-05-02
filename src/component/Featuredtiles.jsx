@@ -7,7 +7,7 @@ const Featuredtiles = ({data}) => {
     return (
         <>
         <h2 className='text-center text-4xl font-bold'>Featured Tiles</h2>
-        <div className='w-11/12 mx-auto grid grid-cols-4'>
+        <div className='w-11/12 mx-auto grid grid-cols-4 gap-4'>
             {
                 tilesData.map(tile => <TIlescard key={tile.id} tile={tile}></TIlescard>)
             }

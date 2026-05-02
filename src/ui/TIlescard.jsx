@@ -50,7 +50,6 @@ const TIlescard = ({ tile }) => {
                     </button>
                 </Card.Footer>
             </Card>
-            ;
         </div>
     );
 };

@@ -16,7 +16,7 @@ const Tile = async ({ params }) => {
                     <Image alt='image' src={expectedData.image} width={500} height={500}></Image>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-3">
                     <div>
                         <p className="text-blue-600 font-medium tracking-wide uppercase text-sm mb-2">
                             {expectedData.category}

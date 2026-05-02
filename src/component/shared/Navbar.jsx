@@ -1,11 +1,18 @@
-
+'use client'
 import Link from "next/link";
 import { Bars, Xmark } from "@gravity-ui/icons";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import logo from '../../image/tiles_gallery_logo.png'
+import { signOut, useSession } from "@/lib/auth-client";
 
 const Navbar = () => {
+    const { data, isPending } = useSession()
+
+    const user = data?.user
+    if (isPending) {
+        <p>loging...</p>
+    }
     const links = <>
         <Link href="/" className="text-sm font-medium text-gray-500 hover:text-slate-900">
             Home
@@ -19,12 +26,19 @@ const Navbar = () => {
 
     </>
     const buttons = <>
-        <Button> <Link href="/login" className="text-sm font-medium">
-            Login
-        </Link></Button>
-        <Link href="/signup" className=" text-black px-4 py-2 rounded-md text-sm font-medium">
-            Signup
-        </Link>
+        {
+            user ? <div>
+                    <h2>{user.name}</h2>
+                    <button onClick={() => signOut()}>Sign out</button>
+            </div> : <>
+                <Button> <Link href="/login" className="text-sm font-medium">
+                    Login
+                </Link></Button>
+                <Link href="/signup" className=" text-black px-4 py-2 rounded-md text-sm font-medium">
+                    Signup
+                </Link>
+            </>
+        }
     </>
     return (
         <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
@@ -38,7 +52,7 @@ const Navbar = () => {
                         </Link>
                     </div>
 
-    
+
                     <div className="hidden md:flex items-center space-x-8">
                         {links}
 

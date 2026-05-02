@@ -1,22 +1,33 @@
 'use client'
-import { authClient } from "@/lib/auth-client";
+import { authClient, signOut } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Fieldset, Form, Input, Label, TextField } from "@heroui/react";
 import { email } from "better-auth";
+import { useRouter } from "next/navigation";
 const Signup = () => {
-    const onSubmit = async(e) => {
+    const router = useRouter()
+    const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const userData = Object.fromEntries(formData.entries())
         console.log('form data is ', userData)
 
-        const {data,error} = await authClient.signUp.email({
-            name:userData.name,
+        const { data, error } = await authClient.signUp.email({
+            name: userData.name,
             email: userData.email,
             image: userData.image,
             password: userData.password
         })
-        console.log('respinse data', {data,error})
+        signOut()
+        if (error) {
+            alert("Signup error:", error);
+            return;
+        }
+
+        if (data) {
+            alert('Response data', { data, error });
+            router.push('/login');
+        }
     };
 
     return (
