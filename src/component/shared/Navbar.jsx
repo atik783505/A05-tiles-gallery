@@ -20,7 +20,7 @@ const Navbar = () => {
         <Link href="/alltiles" className="text-sm font-medium text-gray-500 hover:text-slate-900">
             All Tiles
         </Link>
-        <Link href="/my-profile" className="text-sm font-medium text-gray-500 hover:text-slate-900">
+        <Link href="/myprofile" className="text-sm font-medium text-gray-500 hover:text-slate-900">
             My Profile
         </Link>
 

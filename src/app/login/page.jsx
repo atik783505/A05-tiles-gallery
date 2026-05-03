@@ -3,6 +3,7 @@ import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Fieldset, Form, Input, Label, TextField } from "@heroui/react";
 import { email } from "better-auth";
+import Link from "next/link";
 import { FaGoogle } from "react-icons/fa";
 
 // for gogle login
@@ -37,8 +38,8 @@ const Login = () => {
         }
     }
     return (
-        <div className="w-5/12 mx-auto py-10">
-            <Form onSubmit={onSubmit} className="flex w-96 flex-col gap-4">
+        <div className="py-10">
+            <Form onSubmit={onSubmit} className="flex w-96 mx-auto flex-col gap-4">
                 <TextField
                     isRequired
                     name="email"
@@ -77,17 +78,19 @@ const Login = () => {
                     <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
                     <FieldError />
                 </TextField>
-                <div className="flex gap-2">
-                    <Button type="submit">
+                <div className="flex justify-center gap-2">
+                    <Button className='rounded-sm p-3 w-3/12' type="submit">
                         <Check />
                         Login
                     </Button>
-                    <Button type="reset" variant="secondary">
-                        Reset
-                    </Button>
+                </div>
+                <p className="text-center text-gray-500 text-[20]">OR</p>
+                <Button onClick={handleGoggle} className='w-full'><FaGoogle></FaGoogle> login with gogle</Button>
+                <div className="flex gap-2">
+                    <h2>Don’t have an account?</h2>
+                    <Link href='/signup' className="text-blue-500">Register</Link>
                 </div>
             </Form>
-            <Button onClick={handleGoggle} className='w-full mt-5'><FaGoogle></FaGoogle> login with gogle</Button>
         </div>
     );
 };

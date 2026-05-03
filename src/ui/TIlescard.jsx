@@ -1,5 +1,5 @@
 import { ArrowRight } from "@gravity-ui/icons";
-import { Card, Link } from "@heroui/react"; // HeroUI components
+import { Card, Chip, Link } from "@heroui/react"; // HeroUI components
 import Image from "next/image";
 
 
@@ -13,9 +13,16 @@ const TIlescard = ({ tile }) => {
                         alt={tile.title || "Tile image"}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
+                    <Chip
+                        className="absolute top-3 right-2 z-40 shadow-lg border-none bg-white/80 backdrop-blur-md text-black font-semibold"
+                        variant="flat"
+                    >
+                        {tile.category}
+                    </Chip>
                 </div>
+
 
                 <Card.Header className="flex-col items-start px-5 pt-5">
                     <div className="flex items-center gap-2 mb-1">

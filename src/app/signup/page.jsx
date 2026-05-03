@@ -6,6 +6,7 @@ import { email } from "better-auth";
 import { useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 import { handleGoggle } from "../login/page";
+import Link from "next/link";
 const Signup = () => {
     const router = useRouter()
     const onSubmit = async (e) => {
@@ -33,8 +34,8 @@ const Signup = () => {
     };
 
     return (
-        <div className="w-5/12 mx-auto py-10">
-            <Form onSubmit={onSubmit} className="flex w-96 flex-col gap-4">
+        <div className="w-5/12 mx-auto py-10 flex flex-col justify-center">
+            <Form onSubmit={onSubmit} className="flex w-full max-w-md mx-auto flex-col gap-4">
                 <TextField
                     isRequired
                     name="name"
@@ -95,17 +96,19 @@ const Signup = () => {
                     <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
                     <FieldError />
                 </TextField>
-                <div className="flex gap-2">
-                    <Button type="submit">
+                <div className="flex justify-center gap-2">
+                    <Button className='rounded-sm p-3 w-3/12' type="submit">
                         <Check />
                         Register
                     </Button>
-                    <Button type="reset" variant="secondary">
-                        Reset
-                    </Button>
+                </div>
+                <p className="text-center text-gray-500">OR</p>
+                <Button onClick={handleGoggle} className='w-full'><FaGoogle></FaGoogle> login with gogle</Button>
+                <div className="flex gap-2">
+                    <h2>Don’t have an account?</h2>
+                    <Link href='/login' className="text-blue-500">Login</Link>
                 </div>
             </Form>
-            <Button onClick={handleGoggle} className='w-full mt-5'><FaGoogle></FaGoogle> login with gogle</Button>
         </div>
     );
 };
