@@ -1,9 +1,10 @@
 'use client'
 import { authClient } from "@/lib/auth-client";
-import { Check } from "@gravity-ui/icons";
-import { Button, Description, FieldError, Fieldset, Form, Input, Label, TextField } from "@heroui/react";
+import { Check, Eye, EyeSlash } from "@gravity-ui/icons";
+import { Button, Description, FieldError, Fieldset, Form, Input, InputGroup, Label, TextField } from "@heroui/react";
 import { email } from "better-auth";
 import Link from "next/link";
+import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { toast } from "react-toastify";
 
@@ -16,6 +17,7 @@ export const handleGoggle = async () => {
 
 
 const Login = () => {
+    const [isVisible, setIsVisible] = useState(false);
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -45,7 +47,7 @@ const Login = () => {
                 </div>
 
                 <Form onSubmit={onSubmit} className="flex flex-col gap-5">
-    
+
                     <TextField
                         isRequired
                         name="email"
@@ -61,28 +63,27 @@ const Login = () => {
                         <FieldError className="text-xs text-red-500 mt-1" />
                     </TextField>
 
-                    <TextField
-                        isRequired
-                        name="password"
-                        type="password"
-                        validate={(value) => {
-                            if (value.length < 8) return "Min 8 characters required";
-                            if (!/[A-Z]/.test(value)) return "Need one uppercase letter";
-                            if (!/[0-9]/.test(value)) return "Need one number";
-                            return null;
-                        }}
-                    >
-                        <Label className="text-gray-700 font-medium">Password</Label>
-                        <Input
-                            name="password"
-                            type="password"
-                            placeholder="••••••••"
-                            className="mt-1"
-                        />
-                        <Description className="text-[10px] text-gray-400 leading-tight">
-                            8+ chars, 1 uppercase, 1 number
-                        </Description>
-                        <FieldError className="text-xs text-red-500 mt-1" />
+                    <TextField className="w-full max-w-[280px]" name="password">
+                        <Label>Password</Label>
+                        <InputGroup>
+                            <InputGroup.Input
+                                name="password"
+                                className="w-full max-w-[280px]"
+                                type={isVisible ? "text" : "password"}
+                                placeholder="enter your password"
+                            />
+                            <InputGroup.Suffix className="pr-0">
+                                <Button
+                                    isIconOnly
+                                    aria-label={isVisible ? "Hide password" : "Show password"}
+                                    size="sm"
+                                    variant="ghost"
+                                    onPress={() => setIsVisible(!isVisible)}
+                                >
+                                    {isVisible ? <Eye className="size-4" /> : <EyeSlash className="size-4" />}
+                                </Button>
+                            </InputGroup.Suffix>
+                        </InputGroup>
                     </TextField>
 
                     <Button

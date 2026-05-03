@@ -4,6 +4,7 @@ import Navbar from "@/component/shared/Navbar";
 import Banner from "@/component/Banner";
 import Footer from "@/component/shared/Footer";
 import { ToastContainer } from "react-toastify";
+import 'animate.css';
 
 
 const geistSans = Geist({
