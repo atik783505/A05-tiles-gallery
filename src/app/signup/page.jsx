@@ -24,7 +24,7 @@ const Signup = () => {
         })
         signOut()
         if (error) {
-            toast.error("Signup error:", error);
+            toast.success("Signup error:", error);
             return;
         }
 
@@ -35,81 +35,106 @@ const Signup = () => {
     };
 
     return (
-        <div className="w-5/12 mx-auto py-10 flex flex-col justify-center">
-            <Form onSubmit={onSubmit} className="flex w-full max-w-md mx-auto flex-col gap-4">
-                <TextField
-                    isRequired
-                    name="name"
-                    validate={(value) => {
-                        if (value.length < 5) {
-                            return "Name must be at least 3 characters";
-                        }
-                        return null;
-                    }}
-                >
-                    <Label>Name</Label>
-                    <Input name="name" placeholder="John Doe" />
-                    <FieldError />
-                </TextField>
-                <TextField
-                    isRequired
-                    name="email"
-                    type="email"
-                    validate={(value) => {
-                        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-                            return "Please enter a valid email address";
-                        }
-                        return null;
-                    }}
-                >
-                    <Label>Email</Label>
-                    <Input name="email" placeholder="john@example.com" />
-                    <FieldError />
-                </TextField>
-                <TextField
-                    name="image"
-                    type="text"
-                >
-                    <Label>Image URL</Label>
-                    <Input name="image" placeholder="eneter your email" />
-                    <FieldError />
-                </TextField>
-                <TextField
-                    isRequired
-                    minLength={8}
-                    name="password"
-                    type="password"
-                    validate={(value) => {
-                        if (value.length < 8) {
-                            return "Password must be at least 8 characters";
-                        }
-                        if (!/[A-Z]/.test(value)) {
-                            return "Password must contain at least one uppercase letter";
-                        }
-                        if (!/[0-9]/.test(value)) {
-                            return "Password must contain at least one number";
-                        }
-                        return null;
-                    }}
-                >
-                    <Label>Password</Label>
-                    <Input name="password" placeholder="Enter your password" />
-                    <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
-                    <FieldError />
-                </TextField>
-                <div className="flex justify-center gap-2">
-                    <Button className='rounded-sm p-3 w-3/12' type="submit">
-                        <Check />
-                        Register
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 py-12 px-4">
+            <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+                <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold text-gray-800">Create Account</h2>
+                    <p className="text-gray-500 text-sm mt-1">Join us to explore premium tiles</p>
+                </div>
+
+                <Form onSubmit={onSubmit} className="flex flex-col gap-5">
+                    <TextField
+                        isRequired
+                        name="name"
+                        validate={(value) => value.length < 3 ? "Name must be at least 3 characters" : null}
+                    >
+                        <Label className="text-gray-700 font-medium">Name</Label>
+                        <Input
+                            name="name"
+                            placeholder="John Doe"
+                            className="mt-1"
+                        />
+                        <FieldError className="text-xs text-red-500 mt-1" />
+                    </TextField>
+
+                    <TextField
+                        isRequired
+                        name="email"
+                        type="email"
+                        validate={(value) => !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value) ? "Invalid email address" : null}
+                    >
+                        <Label className="text-gray-700 font-medium">Email</Label>
+                        <Input
+                            name="email"
+                            placeholder="john@example.com"
+                            className="mt-1"
+                        />
+                        <FieldError className="text-xs text-red-500 mt-1" />
+                    </TextField>
+
+                    <TextField name="image" type="text">
+                        <Label className="text-gray-700 font-medium">Image URL</Label>
+                        <Input
+                            name="image"
+                            placeholder="https://example.com/photo.jpg"
+                            className="mt-1"
+                        />
+                    </TextField>
+
+                    <TextField
+                        isRequired
+                        name="password"
+                        type="password"
+                        validate={(value) => {
+                            if (value.length < 8) return "Min 8 characters required";
+                            if (!/[A-Z]/.test(value)) return "Need one uppercase letter";
+                            if (!/[0-9]/.test(value)) return "Need one number";
+                            return null;
+                        }}
+                    >
+                        <Label className="text-gray-700 font-medium">Password</Label>
+                        <Input
+                            name="password"
+                            type="password"
+                            placeholder="••••••••"
+                            className="mt-1"
+                        />
+                        <Description className="text-[10px] text-gray-400 leading-tight">
+                            8+ chars, 1 uppercase, 1 number
+                        </Description>
+                        <FieldError className="text-xs text-red-500 mt-1" />
+                    </TextField>
+
+                    <Button
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-6 rounded-xl transition-all shadow-lg shadow-blue-100 flex items-center justify-center gap-2"
+                        type="submit"
+                    >
+                        <Check className="size-5" />
+                        Register Now
                     </Button>
-                </div>
-                <p className="text-center text-gray-500">OR</p>
-                <Button onClick={handleGoggle} className='w-full'><FaGoogle></FaGoogle> login with gogle</Button>
-                <div className="flex gap-2">
-                    <h2>Don’t have an account?</h2>
-                    <Link href='/login' className="text-blue-500">Login</Link>
-                </div>
-            </Form>
+
+                    <div className="relative my-2">
+                        <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-gray-200"></span></div>
+                        <div className="relative flex justify-center text-xs uppercase"><span className="bg-white px-2 text-gray-400">Or continue with</span></div>
+                    </div>
+
+                    <Button
+                        onClick={handleGoggle}
+                        variant="bordered"
+                        className="w-full border-gray-200 hover:bg-gray-50 font-medium py-6 rounded-xl flex items-center justify-center gap-2"
+                    >
+                        <FaGoogle className="text-red-500" />
+                        Google
+                    </Button>
+
+                    <div className="flex justify-center gap-1.5 text-sm mt-2">
+                        <span className="text-gray-500">Already have an account?</span>
+                        <Link href="/login" className="text-blue-600 font-bold hover:underline">
+                            Login
+                        </Link>
+                    </div>
+                </Form>
+            </div>
         </div>
     );
 };
