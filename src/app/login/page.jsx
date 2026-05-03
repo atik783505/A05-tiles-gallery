@@ -5,6 +5,7 @@ import { Button, Description, FieldError, Fieldset, Form, Input, Label, TextFiel
 import { email } from "better-auth";
 import Link from "next/link";
 import { FaGoogle } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 // for gogle login
 export const handleGoggle = async () => {
@@ -26,15 +27,13 @@ const Login = () => {
             password: userData.password,
             callbackURL: '/'
         })
-        console.log('respinse data', { data, error })
         if (error) {
-            console.error("Login Error:", error);
-            alert(error.message || "Login failed! Please check your credentials.");
+            toast.error(error.message || "Login failed! Please check your credentials.");
             return;
         }
 
         if (data) {
-            alert('Login successful!');
+            toast.success('Login successful!');
         }
     }
     return (

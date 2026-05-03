@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 import { handleGoggle } from "../login/page";
 import Link from "next/link";
+import { toast } from "react-toastify";
 const Signup = () => {
     const router = useRouter()
     const onSubmit = async (e) => {
@@ -23,12 +24,12 @@ const Signup = () => {
         })
         signOut()
         if (error) {
-            alert("Signup error:", error);
+            toast.error("Signup error:", error);
             return;
         }
 
         if (data) {
-            alert('Response data', { data, error });
+            toast.success('Singup Succesfull');
             router.push('/login');
         }
     };

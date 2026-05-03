@@ -5,6 +5,7 @@ import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import logo from '../../image/tiles_gallery_logo.png'
 import { signOut, useSession } from "@/lib/auth-client";
+import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 
 const Navbar = () => {
     const { data, isPending } = useSession()
@@ -34,13 +35,13 @@ const Navbar = () => {
                         <Avatar.Fallback>{user.name[0]}</Avatar.Fallback>
                     </Avatar>
                     <div>
-                        <Button size="sm" onClick={() => signOut()}>Sign out</Button>
+                        <Button variant="danger" size="sm" onClick={() => signOut()}>Sign out<FaSignOutAlt></FaSignOutAlt></Button>
                     </div>
                 </div>
                 :
                 <>
-                    <Button> <Link href="/login" className="text-sm font-medium">
-                        Login
+                    <Button> <Link href="/login" className="text-sm font-medium flex gap-2 items-center">
+                        Login<FaSignInAlt></FaSignInAlt>
                     </Link></Button>
                     <Link href="/signup" className=" text-black px-4 py-2 rounded-md text-sm font-medium">
                         Signup
@@ -49,7 +50,7 @@ const Navbar = () => {
         }
     </>
     return (
-        <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <nav className="sticky top-0 z-50 w-full border-b border-white/20 bg-white/30 backdrop-blur-md">
             <div className="w-11/12 mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
 
