@@ -12,11 +12,12 @@ const Profile = () => {
     }
     return (
         <div className='py-10'>
-            <h2>profile</h2>
             <Card className='max-w-96 mx-auto flex flex-col justify-center items-center py-5'>
-                <Avatar className='w-20 h-20'>
-                    <Avatar.Image alt="John Doe" src={user?.image} referrerPolicy="no-referrer" />
-                </Avatar>
+                <Link href='/myprofile'>
+                    <Avatar className='w-20 h-20'>
+                        <Avatar.Image alt="John Doe" src={user?.image} referrerPolicy="no-referrer" />
+                    </Avatar>
+                </Link>
                 <h2 className='font-bold text-[30px]'>{user?.name}</h2>
                 <p className='opacity-70'>{user?.email}</p>
                 <Button variant="secondary">

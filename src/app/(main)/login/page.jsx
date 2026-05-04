@@ -1,63 +1,53 @@
 'use client'
-import { authClient, signOut } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import { Check, Eye, EyeSlash } from "@gravity-ui/icons";
 import { Button, Description, FieldError, Fieldset, Form, Input, InputGroup, Label, TextField } from "@heroui/react";
 import { email } from "better-auth";
-import { useRouter } from "next/navigation";
-import { FaGoogle } from "react-icons/fa";
-import { handleGoggle } from "../login/page";
 import Link from "next/link";
-import { toast } from "react-toastify";
 import { useState } from "react";
-const Signup = () => {
+import { toast } from "react-toastify";
+import logo from '../../../image/toppng.com-google-multicolor-g-letter-icon-1000x1000.png'
+import Image from "next/image";
+
+// for gogle login
+export const handleGoggle = async () => {
+    await authClient.signIn.social({
+        provider: "google",
+    });
+};
+
+
+const Login = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const router = useRouter()
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const userData = Object.fromEntries(formData.entries())
         console.log('form data is ', userData)
 
-        const { data, error } = await authClient.signUp.email({
-            name: userData.name,
+        const { data, error } = await authClient.signIn.email({
             email: userData.email,
-            image: userData.image,
-            password: userData.password
+            password: userData.password,
+            callbackURL: '/'
         })
-        signOut()
         if (error) {
-            toast.success("Signup error:", error);
+            toast.error(error.message || "Login failed! Please check your credentials.");
             return;
         }
 
         if (data) {
-            toast.success('Singup Succesfull');
-            router.push('/login');
+            toast.success('Login successful!');
         }
-    };
-
+    }
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 py-12 px-4">
             <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
                 <div className="text-center mb-8">
-                    <h2 className="text-2xl font-bold text-gray-800">Create Account</h2>
+                    <h2 className="text-2xl font-bold text-gray-800">Login</h2>
                     <p className="text-gray-500 text-sm mt-1">Join us to explore premium tiles</p>
                 </div>
 
                 <Form onSubmit={onSubmit} className="flex flex-col gap-5">
-                    <TextField
-                        isRequired
-                        name="name"
-                        validate={(value) => value.length < 3 ? "Name must be at least 3 characters" : null}
-                    >
-                        <Label className="text-gray-700 font-medium">Name</Label>
-                        <Input
-                            name="name"
-                            placeholder="John Doe"
-                            className="mt-1"
-                        />
-                        <FieldError className="text-xs text-red-500 mt-1" />
-                    </TextField>
 
                     <TextField
                         isRequired
@@ -74,21 +64,12 @@ const Signup = () => {
                         <FieldError className="text-xs text-red-500 mt-1" />
                     </TextField>
 
-                    <TextField name="image" type="text">
-                        <Label className="text-gray-700 font-medium">Image URL</Label>
-                        <Input
-                            name="image"
-                            placeholder="https://example.com/photo.jpg"
-                            className="mt-1"
-                        />
-                    </TextField>
-
-                    <TextField className="w-full max-w-[280px]" name="password">
+                    <TextField className="w-full " name="password">
                         <Label>Password</Label>
                         <InputGroup>
                             <InputGroup.Input
                                 name="password"
-                                className="w-full max-w-[280px]"
+                                className="w-full"
                                 type={isVisible ? "text" : "password"}
                                 placeholder="enter your password"
                             />
@@ -111,7 +92,7 @@ const Signup = () => {
                         type="submit"
                     >
                         <Check className="size-5" />
-                        Register Now
+                        Login
                     </Button>
 
                     <div className="relative my-2">
@@ -124,14 +105,14 @@ const Signup = () => {
                         variant="bordered"
                         className="w-full border-gray-200 hover:bg-gray-50 font-medium py-6 rounded-xl flex items-center justify-center gap-2"
                     >
-                        <FaGoogle className="text-red-500" />
+                        <Image src={logo} alt="logo" width={20} height={20}></Image>
                         Google
                     </Button>
 
                     <div className="flex justify-center gap-1.5 text-sm mt-2">
-                        <span className="text-gray-500">Already have an account?</span>
-                        <Link href="/login" className="text-blue-600 font-bold hover:underline">
-                            Login
+                        <span className="text-gray-500">Don’t have an account?</span>
+                        <Link href="/signup" className="text-blue-600 font-bold hover:underline">
+                            Register
                         </Link>
                     </div>
                 </Form>
@@ -140,4 +121,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default Login;

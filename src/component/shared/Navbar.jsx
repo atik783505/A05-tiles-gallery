@@ -29,7 +29,7 @@ const Navbar = () => {
     const buttons = <>
         {
             user ?
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                     <Avatar>
                         <Avatar.Image alt="John Doe" src={user.image} referrerPolicy="no-referrer" />
                         <Avatar.Fallback>{user.name[0]}</Avatar.Fallback>

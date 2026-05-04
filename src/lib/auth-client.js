@@ -5,5 +5,6 @@ export const authClient = createAuthClient({
     
 })
 // https://a05-tiles-gallery.vercel.app/
+// http://localhost:3000/
 
 export const { signIn, signUp,signOut,useSession} = createAuthClient()
