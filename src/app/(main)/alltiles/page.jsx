@@ -24,7 +24,7 @@ const Alltiles = () => {
     return (
         <div>
             <h2 className='text-center font-bold text-[25px]'>All Tiles</h2>
-            <div className='w-3/12 mx-auto py-3'>
+            <div className='w-7/12 md:w-3/12 mx-auto py-3'>
                 <SearchField name="search">
                     <Label>Search</Label>
                     <SearchField.Group>
