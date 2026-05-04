@@ -4,7 +4,7 @@
 
 ## 🚀 Deployment Links
 *   **Production:** [tiles-gallery.vercel.app](https://a05-tiles-gallery.vercel.app/)
-*   **GitHub Pages:** [atik783505.github.io/tiles-gallery](https://github.com/atik783505/     A05-tiles-gallery)
+
 
 ## 🎯 Purpose
 The goal of this project is to provide an aesthetic digital catalog for architectural and decorative tiles[cite: 1, 2]. It allows users to explore various textures, designs, and styles through a high-performance, visually engaging interface[cite: 1, 2].
