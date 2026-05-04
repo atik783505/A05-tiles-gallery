@@ -6,26 +6,56 @@ import Image from "next/image";
 import logo from '../../image/tiles_gallery_logo.png'
 import { signOut, useSession } from "@/lib/auth-client";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
+import { usePathname, useRouter } from "next/navigation";
+
 
 const Navbar = () => {
+    const router = useRouter()
     const { data, isPending } = useSession()
+
+    const pathName = usePathname()
+    console.log(pathName)
+
+    const handleSignout = async () => {
+        await signOut()
+        router.refresh()
+    }
 
     const user = data?.user
     if (isPending) {
         <p>loging...</p>
     }
-    const links = <>
-        <Link href="/" className="text-sm font-medium text-gray-500 hover:text-slate-900">
-            Home
-        </Link>
-        <Link href="/alltiles" className="text-sm font-medium text-gray-500 hover:text-slate-900">
-            All Tiles
-        </Link>
-        <Link href="/myprofile" className="text-sm font-medium text-gray-500 hover:text-slate-900">
-            My Profile
-        </Link>
-
-    </>
+    const links = (
+        <>
+            <Link
+                href="/"
+                className={`text-sm font-medium transition-colors ${pathName === '/'
+                        ? 'text-blue-600'
+                        : 'text-gray-500 hover:text-slate-900'
+                    }`}
+            >
+                Home
+            </Link>
+            <Link
+                href="/alltiles"
+                className={`text-sm font-medium transition-colors ${pathName === '/alltiles'
+                        ? 'text-blue-600'
+                        : 'text-gray-500 hover:text-slate-900'
+                    }`}
+            >
+                All Tiles
+            </Link>
+            <Link
+                href="/myprofile"
+                className={`text-sm font-medium transition-colors ${pathName === '/myprofile'
+                        ? 'text-blue-600'
+                        : 'text-gray-500 hover:text-slate-900'
+                    }`}
+            >
+                My Profile
+            </Link>
+        </>
+    );
     const buttons = <>
         {
             user ?
@@ -35,7 +65,7 @@ const Navbar = () => {
                         <Avatar.Fallback>{user.name[0]}</Avatar.Fallback>
                     </Avatar>
                     <div>
-                        <Button variant="danger" size="sm" onClick={() => signOut()}>Sign out<FaSignOutAlt></FaSignOutAlt></Button>
+                        <Button variant="danger" size="sm" onClick={handleSignout}>Sign out<FaSignOutAlt></FaSignOutAlt></Button>
                     </div>
                 </div>
                 :

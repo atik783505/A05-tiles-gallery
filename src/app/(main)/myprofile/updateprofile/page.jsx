@@ -2,6 +2,7 @@
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, Form, Input, Label, TextField } from "@heroui/react";
+import { toast } from "react-toastify";
 
 const page = () => {
     const onSubmit = async (e) => {
@@ -14,12 +15,13 @@ const page = () => {
             image
         })
         if (error) {
-            alert("Update failed!");
+            toast.error("Update failed!");
             return;
         }
 
         if (data) {
             window.location.href = '/myprofile';
+            toast.success('profile updated')
         }
     }
     return (

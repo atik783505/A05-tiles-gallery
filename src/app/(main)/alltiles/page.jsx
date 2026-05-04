@@ -15,8 +15,6 @@ const Alltiles = () => {
         };
         loadData();
     }, []);
-
-    // Filter courses based on search query
     const filteredCourses = data.filter((d) =>
         d.title.toLowerCase().includes(searchQuery.toLowerCase())
     );

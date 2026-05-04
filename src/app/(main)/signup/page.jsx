@@ -85,7 +85,7 @@ const Signup = () => {
                         />
                     </TextField>
 
-                    <TextField className="w-full" name="password">
+                    <TextField isRequired className="w-full" name="password">
                         <Label>Password</Label>
                         <InputGroup>
                             <InputGroup.Input
@@ -123,8 +123,7 @@ const Signup = () => {
 
                     <Button
                         onClick={handleGoggle}
-                        variant="bordered"
-                        className="w-full border-gray-200 hover:bg-gray-50 font-medium py-6 rounded-xl flex items-center justify-center gap-2"
+                        className="w-full bg-gray-200 text-black border border-blue-500 font-medium py-6 rounded-xl flex items-center justify-center gap-2"
                     >
                         <Image src={logo} alt="logo" width={20} height={20}></Image>
                         Google
